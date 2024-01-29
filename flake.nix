@@ -7,6 +7,10 @@
         path = ./scala-js;
         description = "ScalaJS support with sbt, node, and yarn";
       };
+      haskell-exe = {
+        path = ./haskell-executable;
+        description = "Haskell template for simple haskell exe";
+      };
     };
   };
 }
