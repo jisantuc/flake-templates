@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-23.11";
     utils.url = "github:numtide/flake-utils";
   };
 
@@ -16,9 +16,10 @@
             ps.text
           ]);
           devDependencies = with haskellPackages; [
-            cabal-install
             cabal-fmt
+            cabal-install
             haskell-language-server
+            hls-retrie-plugin
             hlint
             ormolu
           ];
