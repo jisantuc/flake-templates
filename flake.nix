@@ -11,6 +11,10 @@
         path = ./haskell-executable;
         description = "Haskell template for simple haskell exe";
       };
+      python-ds-stack = {
+        path = ./python-ds-stack;
+        description = "Python dev environment with pandas and visualization tools";
+      };
     };
   };
 }
