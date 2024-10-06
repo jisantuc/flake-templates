@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-24.05";
     utils.url = "github:numtide/flake-utils";
   };
 
@@ -9,7 +9,7 @@
       (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          compiler = "ghc96";
+          compiler = "ghc910";
           haskellPackages = pkgs.haskell.packages.${compiler};
           packageDependencies = (ps: [
             ps.optparse-applicative

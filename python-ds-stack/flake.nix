@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-24.05";
     utils.url = "github:numtide/flake-utils";
   };
 
@@ -25,7 +25,6 @@
           ]);
           devPython = pkgs.python311.withPackages
             (ps: appDependencies ps ++ pythonDevDependencies ps ++ testDependencies ps);
-          packagePython = pkgs.python311.withPackages (ps: appDependencies ps);
         in
         {
           devShells.default = pkgs.mkShell
