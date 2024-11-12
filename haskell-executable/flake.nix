@@ -9,32 +9,22 @@
       (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          compiler = "ghc910";
+          compiler = "ghc96";
           haskellPackages = pkgs.haskell.packages.${compiler};
-          packageDependencies = (ps: [
-            ps.optparse-applicative
-            ps.text
-          ]);
           devDependencies = with haskellPackages; [
             cabal-fmt
             cabal-install
             haskell-language-server
-            hls-retrie-plugin
             hlint
             ormolu
           ];
-          testDependencies = (ps: [
-            ps.hspec
-            ps.hspec-discover
-          ]);
-          haskell = haskellPackages.ghcWithPackages
-            (ps: packageDependencies ps ++ testDependencies ps);
         in
         {
-          devShells.default = pkgs.mkShell
-            {
-              packages = [ haskell ] ++ devDependencies;
-            };
+          devShells.default = haskellPackages.shellFor {
+            packages = ps: [ (ps.callCabal2nix "project-name" ./. { }) ];
+            nativeBuildInputs = devDependencies;
+            withHoogle = true;
+          };
 
           packages.default = haskellPackages.callCabal2nix "project-name" ./. { };
         }
