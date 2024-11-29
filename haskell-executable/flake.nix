@@ -9,7 +9,7 @@
       (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          compiler = "ghc96";
+          compiler = "ghc98";
           haskellPackages = pkgs.haskell.packages.${compiler};
           devDependencies = with haskellPackages; [
             cabal-fmt
@@ -25,6 +25,11 @@
             packages = ps: [ (ps.callCabal2nix "project-name" ./. { }) ];
             nativeBuildInputs = devDependencies;
             withHoogle = true;
+          };
+
+          devShells.ci = haskellPackages.shellFor {
+            packages = ps: [ (ps.callCabal2nix "project-name" ./. { }) ];
+            nativeBuildInputs = with haskellPackages; [ cabal-install ];
           };
 
           packages.default = haskellPackages.callCabal2nix "project-name" ./. { };
